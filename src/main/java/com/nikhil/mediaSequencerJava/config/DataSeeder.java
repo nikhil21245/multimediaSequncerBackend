@@ -25,10 +25,6 @@ public class DataSeeder {
                 return;
             }
 
-            // Real, publicly hosted images (Picsum) and a real
-            // publicly hosted sample video (Google's test bucket)
-            // instead of the non-resolving example.com placeholders.
-
             Media m1 = new Media(
                     "M1",
                     "Nature Image",
