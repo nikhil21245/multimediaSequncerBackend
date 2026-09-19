@@ -3,7 +3,7 @@ import './App.css'
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ||
-  'https://multimediasequncerbackend-production.up.railway.app'
+  'https://multimediasequncerbackend-production-c1d9.up.railway.app'
 
 const WS_URL =
   API_BASE_URL.replace(/^http/, 'ws') + '/ws'
