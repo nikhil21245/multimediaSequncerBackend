@@ -25,11 +25,15 @@ public class DataSeeder {
                 return;
             }
 
+            // Real, publicly hosted images (Picsum) and a real
+            // publicly hosted sample video (Google's test bucket)
+            // instead of the non-resolving example.com placeholders.
+
             Media m1 = new Media(
                     "M1",
                     "Nature Image",
                     MediaType.IMAGE,
-                    "https://example.com/nature.jpg",
+                    "https://picsum.photos/id/1015/1280/720",
                     10000L
             );
 
@@ -37,7 +41,7 @@ public class DataSeeder {
                     "M2",
                     "Demo Video",
                     MediaType.VIDEO,
-                    "https://example.com/video.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
                     30000L
             );
 
@@ -45,7 +49,7 @@ public class DataSeeder {
                     "M3",
                     "City Image",
                     MediaType.IMAGE,
-                    "https://example.com/city.jpg",
+                    "https://picsum.photos/id/1016/1280/720",
                     15000L
             );
 
