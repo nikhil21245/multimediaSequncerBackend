@@ -54,6 +54,15 @@ function App() {
       const playNext = () => {
         const media = playlist[currentIndex]
 
+        currentIndex = (currentIndex + 1) % playlist.length
+
+        // Safety guard: skip this slot instead of crashing if an
+        // entry is ever missing/undefined.
+        if (!media) {
+          timers.push(setTimeout(playNext, 10000))
+          return
+        }
+
         setCurrentMedia((prev) => ({
           ...prev,
           [window.id]: {
@@ -61,8 +70,6 @@ function App() {
             startedAt: Date.now()
           }
         }))
-
-        currentIndex = (currentIndex + 1) % playlist.length
 
         const duration = media.durationMs || 10000
 
@@ -173,7 +180,10 @@ function App() {
 
         const data = await response.json()
 
-        playlistData[window.id] = data
+        // The backend returns { id, name, playlist: [...] } —
+        // pull out the actual array here instead of storing the
+        // whole wrapper object.
+        playlistData[window.id] = data.playlist || []
       } catch (error) {
         console.error(
           `Failed to fetch playlist for window ${window.id}:`,
