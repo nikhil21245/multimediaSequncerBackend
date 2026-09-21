@@ -10,4 +10,7 @@ public interface WindowMediaRepository extends JpaRepository<WindowMedia, Long> 
     List<WindowMedia> findByWindowOrderBySequenceOrderAsc(MediaWindow window);
 
     List<WindowMedia> findByWindowIdOrderBySequenceOrderAsc(Long windowId);
+
+    // add these two:
+    void deleteByWindowAndSequenceOrder(MediaWindow window, Integer sequenceOrder);
 }

@@ -26,33 +26,25 @@ public class DataSeeder {
             }
 
             Media m1 = new Media(
-                    "M1",
-                    "Nature Image",
-                    MediaType.IMAGE,
+                    "M1", "Nature Image", MediaType.IMAGE,
                     "https://picsum.photos/id/1015/1280/720",
-                    10000L
+                    5000L
             );
 
             Media m2 = new Media(
-                    "M2",
-                    "Demo Video",
-                    MediaType.VIDEO,
+                    "M2", "Demo Video", MediaType.VIDEO,
                     "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                    30000L
+                    5000L
             );
 
             Media m3 = new Media(
-                    "M3",
-                    "City Image",
-                    MediaType.IMAGE,
+                    "M3", "City Image", MediaType.IMAGE,
                     "https://picsum.photos/id/1016/1280/720",
-                    15000L
+                    5000L
             );
 
             Media m4 = new Media(
-                    "M4",
-                    "Blank Screen",
-                    MediaType.BLANK,
+                    "M4", "Blank Screen", MediaType.BLANK,
                     null,
                     5000L
             );
@@ -82,8 +74,7 @@ public class DataSeeder {
                             new MediaWindow("Window 4")
                     );
 
-            // Window 1 list
-
+            // Window 1 list: M1 -> M2 -> M3 -> M4
 
             windowMediaRepository.save(
                     new WindowMedia(window1, m1, 1)
@@ -97,7 +88,11 @@ public class DataSeeder {
                     new WindowMedia(window1, m3, 3)
             );
 
-            // Window 2 list
+            windowMediaRepository.save(
+                    new WindowMedia(window1, m4, 4)
+            );
+
+            // Window 2 list: M2 -> M3 -> M4 -> M1
 
             windowMediaRepository.save(
                     new WindowMedia(window2, m2, 1)
@@ -111,24 +106,29 @@ public class DataSeeder {
                     new WindowMedia(window2, m4, 3)
             );
 
-            // Window 3 list
+            windowMediaRepository.save(
+                    new WindowMedia(window2, m1, 4)
+            );
 
+            // Window 3 list: M3 -> M4 -> M1 -> M2
 
             windowMediaRepository.save(
                     new WindowMedia(window3, m3, 1)
             );
 
             windowMediaRepository.save(
-                    new WindowMedia(window3, m1, 2)
+                    new WindowMedia(window3, m4, 2)
             );
 
             windowMediaRepository.save(
-                    new WindowMedia(window3, m2, 3)
+                    new WindowMedia(window3, m1, 3)
             );
 
+            windowMediaRepository.save(
+                    new WindowMedia(window3, m2, 4)
+            );
 
-            // Window 4 list
-
+            // Window 4 list: M4 -> M1 -> M2 -> M3
 
             windowMediaRepository.save(
                     new WindowMedia(window4, m4, 1)
@@ -139,7 +139,11 @@ public class DataSeeder {
             );
 
             windowMediaRepository.save(
-                    new WindowMedia(window4, m3, 3)
+                    new WindowMedia(window4, m2, 3)
+            );
+
+            windowMediaRepository.save(
+                    new WindowMedia(window4, m3, 4)
             );
         };
     }
