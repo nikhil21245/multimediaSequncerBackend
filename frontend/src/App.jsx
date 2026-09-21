@@ -1,3 +1,5 @@
+// NOTE: durationMs for M1-M4 is now 5000 (5s) in the DB — see SQL migration.
+// No frontend code change needed; playNext() already reads media.durationMs live.
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
 
@@ -17,6 +19,8 @@ function App() {
   const [selectedSyncMedia, setSelectedSyncMedia] = useState('M1')
   const [loading, setLoading] = useState(true)
 
+  // playerGeneration only changes when we WANT playback to restart
+  // (first load, and every 5-hour cycle reset) — never on routine polling
   const [playerGeneration, setPlayerGeneration] = useState(0)
 
   const playlistsRef = useRef({})
@@ -25,7 +29,7 @@ function App() {
     fetchWindows()
   }, [])
 
- 
+  // routine polling: refresh playlist content silently, no restart
   useEffect(() => {
     if (windows.length === 0) {
       return
@@ -47,7 +51,8 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
-
+  // the actual sequencer — restarts ONLY on window-list change or playerGeneration bump,
+  // NOT on every playlist poll
   useEffect(() => {
     if (windows.length === 0) {
       return
@@ -260,11 +265,13 @@ function App() {
     if (mediaType === 'VIDEO') {
       return (
         <video
+          key={mediaUrl}
           className="media"
           src={mediaUrl}
           autoPlay
           muted
           playsInline
+          preload="auto"
         />
       )
     }
